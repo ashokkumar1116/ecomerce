@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -13,6 +13,9 @@ import {
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 import { signOutStart } from "../../store/user/user.action";
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { setIsCartOpen } from "../../store/cart/cart.action";
 
 const Navigation = () => {
 
@@ -21,6 +24,16 @@ const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser)
   const isCartOpen  = useSelector(selectIsCartOpen)
   const signOutUser = () => { dispatch(signOutStart()) }
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => { 
+    if(location.pathname.split('/')[1] === 'auth' && currentUser !== null){
+      navigate('/');
+    }
+    dispatch(setIsCartOpen(false)) 
+  }, [location]);
 
 
   return (

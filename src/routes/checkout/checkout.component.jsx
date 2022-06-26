@@ -9,6 +9,7 @@ const Checkout = () => {
   const cartTotal = useSelector(selectCartTotal);
 
   return (
+    
     <div className='checkout-container'>
         <div className='checkout-header'>
           <div className='header-block '>
@@ -31,7 +32,10 @@ const Checkout = () => {
           cartItems.map(cartItem => <CheckoutItem key={cartItem.id} cartItem={cartItem }/>)
         }
       <span className='total'>Total: $  {cartTotal}</span>
-      <PaymentForm />
+      {
+        cartItems.length > 0 && <PaymentForm />
+      }
+      
     </div>
   );
 }
