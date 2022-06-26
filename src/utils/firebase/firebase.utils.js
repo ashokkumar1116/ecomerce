@@ -1,13 +1,13 @@
 import { initializeApp } from 'firebase/app'
 import { 
-          getAuth, 
-          signInWithPopup, 
-          GoogleAuthProvider, 
-          createUserWithEmailAndPassword, 
-          signInWithEmailAndPassword, 
-          signOut, 
-          onAuthStateChanged 
-        } from 'firebase/auth'
+  getAuth, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  onAuthStateChanged 
+} from 'firebase/auth'
 import { 
   getFirestore,
   doc, 
@@ -21,12 +21,12 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCglo8-sWilXdMguPVCeTcAbZIqOwkc3Go",
-    authDomain: "crwn-clothing-db-118fb.firebaseapp.com",
-    projectId: "crwn-clothing-db-118fb",
-    storageBucket: "crwn-clothing-db-118fb.appspot.com",
-    messagingSenderId: "1080233801049",
-    appId: "1:1080233801049:web:fd25a9deca122cd6208848"
+  apiKey: "AIzaSyCglo8-sWilXdMguPVCeTcAbZIqOwkc3Go",
+  authDomain: "crwn-clothing-db-118fb.firebaseapp.com",
+  projectId: "crwn-clothing-db-118fb",
+  storageBucket: "crwn-clothing-db-118fb.appspot.com",
+  messagingSenderId: "1080233801049",
+  appId: "1:1080233801049:web:fd25a9deca122cd6208848"
   };
   
   // Initialize Firebase
@@ -35,7 +35,7 @@ const firebaseConfig = {
   const googleProvider = new GoogleAuthProvider();
 
   googleProvider.setCustomParameters({
-      prompt: 'select_account'
+    prompt: 'select_account'
   })
 
   export const auth = getAuth();
@@ -73,29 +73,29 @@ const firebaseConfig = {
 
     if(!userSnapShot.exists())
     {
-        const { displayName, email } = userAuth;
-        const createdAt = new Date();
+      const { displayName, email } = userAuth;
+      const createdAt = new Date();
 
-        try {
-            await setDoc(userDocRef, {
-                displayName,
-                email,
-                createdAt,
-                ...additionalInformation
-            })
-            
-        } catch (error) {
-            console.log(`Error Creating The User: ${error}`)
-        }
+      try {
+        await setDoc(userDocRef, {
+          displayName,
+          email,
+          createdAt,
+          ...additionalInformation
+          })
+          
+      } catch (error) {
+        console.log(`Error Creating The User: ${error}`)
+      }
     }
 
-    return userDocRef
+    return userSnapShot
   }
 
   export const createAuthUserWithEmailndPassword = async (email, password) => {
     if(!email || !password) return 
 
-    return await createUserWithEmailAndPassword(auth, email, password);
+     await createUserWithEmailAndPassword(auth, email, password);
   }
 
   export const signInAuthUserWithEmailndPassword = async (email, password) => {
@@ -107,3 +107,16 @@ const firebaseConfig = {
   export const signOutUser = async () => await signOut(auth)
 
   export const  onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+  export const getCurrentUser = () => {
+    return new Promise(( resolve, reject) =>{
+      const unsubscribe = onAuthStateChanged(
+        auth, 
+        (userAuth) => {
+          unsubscribe();
+          resolve(userAuth)
+        },
+        reject
+      )
+    })
+  }
