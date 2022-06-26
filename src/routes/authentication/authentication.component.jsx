@@ -15,7 +15,7 @@ useEffect(() => {
         navigate('/');
     }
 })
-return currentUser !== null && (
+return currentUser === null && (
     <div className="authentication-container">
         <SignInForm />
         <SignUpForm />
