@@ -3,10 +3,21 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector';
 import PaymentForm from '../../components/payment-form/payment-form.component'
 import './checkout.styles.scss'
+import { selectCurrentUser } from '../../store/user/user.selector';
+import Button from '../../components/button/button.component';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
+  const user = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
+
+  const signinHandler = () => {
+    navigate('/auth?checkout');
+  };
+
+  console.log(user)
 
   return (
     
@@ -33,7 +44,7 @@ const Checkout = () => {
         }
       <span className='total'>Total: $  {cartTotal}</span>
       {
-        cartItems.length > 0 && <PaymentForm />
+        cartItems.length > 0 &&  user?<PaymentForm />:<Button onClick={signinHandler}>Login</Button>
       }
       
     </div>
