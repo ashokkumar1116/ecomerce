@@ -18,13 +18,13 @@ const categories = [
       "id": 3,
       "title": "sneakers",
       "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png",
-      "route": "shop/"
+      "route": "shop/sneakers"
   },
   {
       "id": 4,
       "title": "womens",
       "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png",
-      "route": "shop/sneakers"
+      "route": "shop/womens"
   },
   {
       "id": 5,
