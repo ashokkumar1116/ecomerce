@@ -44,7 +44,7 @@ const Checkout = () => {
         }
       <span className='total'>Total: $  {cartTotal}</span>
       {
-        cartItems.length > 0 &&  user?<PaymentForm />:<Button onClick={signinHandler}>Login</Button>
+        cartItems.length > 0 &&  (user?<PaymentForm />:<Button onClick={signinHandler}>Login</Button>)
       }
       
     </div>
