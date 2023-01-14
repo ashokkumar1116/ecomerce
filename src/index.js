@@ -8,7 +8,6 @@ import App from './App';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react'
-import { stripePromise } from './utils/stripe/stripe.utils';
 
 const entryPoint = document.getElementById("root");
 ReactDOM.render(
@@ -16,9 +15,7 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor} >
         <BrowserRouter>
-          <Elements stripe={stripePromise}>
             <App />
-          </Elements>
         </BrowserRouter>
       </PersistGate>
     </Provider>,
