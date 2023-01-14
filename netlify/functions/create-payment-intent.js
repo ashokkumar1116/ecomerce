@@ -1,7 +1,7 @@
 const { async } = require('@firebase/util');
 
 require('dotenv').config()
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')('sk_test_51MQ39TLg1bKM78qbgZG7USiSzitKnDmr3IESfOeY2qjhxOoMaTWvsqxfK7nBv0DO3DwG1kyFnPPaAlIVdguiX9Mg006epzeM5I');
 
 exports.handler = async (event) =>{ 
   try {
