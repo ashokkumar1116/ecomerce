@@ -1,6 +1,6 @@
 # Profile
 
-### [Live Site](https://ecom.irs.dev/)
+### [Live Site](https://ashokkumar1116.github.io/ecomerce/)
 
 ## Built Application Using Libraries
 
@@ -11,7 +11,7 @@
 ## Setting Up The Project
 
 ```
-git@github.com:srikrishnak-dev/ecom.git
+https://github.com/ashokkumar1116/ecomerce.git
 cd ecom/
 npm install
 npm start
